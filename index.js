@@ -12,7 +12,17 @@ app.post('/', (req, res) => {
         },
         handle(handlerInput) {
             const speechText = 'Welcome to the compare the car part dot com, please tell us your vehicle registration number!';
-
+            res.send({
+                version: '1.0',
+                response: {
+                    shouldEndSession: false,
+                    outputSpeech: {
+                        type: 'SSML',
+                        text: speechText,
+                        ssml: '<speak>'+ speechText + '</speak>'
+                    }
+                }
+            })
             return handlerInput.responseBuilder
                 .speak(speechText)
                 .reprompt(speechText)
@@ -106,17 +116,7 @@ app.post('/', (req, res) => {
         .addErrorHandlers(ErrorHandler)
         .lambda();
 
-    res.send({
-        version: '1.0',
-        response: {
-            shouldEndSession: false,
-            outputSpeech: {
-                type: 'SSML',
-                text: 'Hello World!',
-                ssml: '<speak>Hello World!</speak>'
-            }
-        }
-    })
+
 });
 
-app.listen(8080, () => console.log('Example app listening on port 8080!'));
+app.listen(process.env.PORT || 3000, () => console.log('Example app listening on port 8080!'));
