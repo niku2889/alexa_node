@@ -5,7 +5,7 @@ const Alexa = require('ask-sdk-core');
 
 
 app.post('/', (req, res) => {
-    console.log(req.event)
+    console.log(req)
     const LaunchRequestHandler = {
         canHandle(handlerInput) {
             return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
